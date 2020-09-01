@@ -1,4 +1,5 @@
 // Requiring our models and passport as we've configured it
+// this will help us verify our info that we have in our database
 var db = require("../models");
 var passport = require("../config/passport");
 
@@ -29,6 +30,7 @@ module.exports = function(app) {
   // Route for logging user out
   app.get("/logout", function(req, res) {
     req.logout();
+    // this brings us back to the main page
     res.redirect("/");
   });
 

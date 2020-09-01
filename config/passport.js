@@ -7,8 +7,10 @@ var db = require("../models");
 passport.use(new LocalStrategy(
   // Our user will sign in using an email, rather than a "username"
   {
+    // we define only email here
     usernameField: "email"
   },
+  // this functions needs email && password && BOOL value 'done'
   function(email, password, done) {
     // When a user tries to sign in this code runs
     db.User.findOne({
@@ -19,12 +21,14 @@ passport.use(new LocalStrategy(
       // If there's no user with the given email
       if (!dbUser) {
         return done(null, false, {
+          // we will let the user know that it was incorrect
           message: "Incorrect email."
         });
       }
       // If there is a user with the given email, but the password the user gives us is incorrect
       else if (!dbUser.validPassword(password)) {
         return done(null, false, {
+          // we will let the user know that it was incorrect as well here
           message: "Incorrect password."
         });
       }
@@ -36,7 +40,7 @@ passport.use(new LocalStrategy(
 
 // In order to help keep authentication state across HTTP requests,
 // Sequelize needs to serialize and deserialize the user
-// Just consider this part boilerplate needed to make it all work
+// Just consider this part boilerplate needed to make it all work === this is just like when we render server.js as well. its a boilerplate 
 passport.serializeUser(function(user, cb) {
   cb(null, user);
 });
