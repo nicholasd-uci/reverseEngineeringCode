@@ -1,3 +1,4 @@
+/* this is calling the class for sign-up and login and makings sure they have consistent margin 50px */
 form.signup,
 form.login {
   margin-top: 50px;
